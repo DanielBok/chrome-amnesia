@@ -1,15 +1,13 @@
-import { Button } from "antd";
 import React from "react";
-import styles from "./styles.less";
 
+import AddButton from "./AddButton";
 import ResetButton from "./ResetButton";
 import SaveButton from "./SaveButton";
+import styles from "./styles.less";
 
 export default () => (
   <div className={styles.footer}>
-    <Button icon="plus" className={styles.footerButton}>
-      Add
-    </Button>
+    <AddButton />
     <ResetButton />
     <SaveButton />
   </div>

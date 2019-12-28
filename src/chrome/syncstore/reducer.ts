@@ -23,6 +23,11 @@ export default (
       return { numOriginalRules, rules };
     }
 
+    case SyncActions.ADD_NEW_RULE: {
+      const rules = { ...state.rules, [SyncActions.ADD_NEW_RULE]: "" };
+      return { ...state, rules };
+    }
+
     case SyncActions.REMOVE_RULE: {
       const ruleToRemove = action.payload;
       const rules = Object.entries(state.rules)

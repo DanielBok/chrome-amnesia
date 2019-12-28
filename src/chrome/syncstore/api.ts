@@ -51,6 +51,15 @@ export const updateRule = (
 };
 
 /**
+ * Adds a new empty rule row. If there is a new rule that is not saved, store will not add new rule
+ */
+export const addNewEmptyRule = (): ThunkFunction => (dispatch, getState) => {
+  if (SyncSelector.hasExistingNewRule(getState())) return;
+
+  dispatch({ type: SyncActions.ADD_NEW_RULE });
+};
+
+/**
  * Saves the rules permanently into the chrome store and refresh the redux store with the new rules
  */
 export const saveRules = (): ThunkFunctionAsync => async (
