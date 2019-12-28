@@ -3,7 +3,7 @@ import * as SyncActions from "./actions";
 import * as SyncType from "./types";
 
 const defaultState: SyncType.SyncStore = {
-  rules: new Set<string>()
+  rules: {}
 };
 
 export default (
@@ -12,13 +12,23 @@ export default (
 ) => {
   switch (action.type) {
     case SyncActions.FETCH_RULES: {
-      const rules = new Set<string>(action.payload);
+      const rules = (action.payload as string[]).reduce(
+        (acc, x) => ({ ...acc, [x]: x }),
+        {} as Record<string, string>
+      );
+
       return { ...state, rules };
     }
 
     case SyncActions.REMOVE_RULE: {
-      state.rules.delete(action.payload);
-      const rules = new Set([...state.rules]);
+      const ruleToRemove = action.payload;
+      const rules = Object.entries(state.rules)
+        .filter(([key, _]) => key !== ruleToRemove)
+        .reduce(
+          (acc, [rule, value]) => ({ ...acc, [rule]: value }),
+          {} as Record<string, string>
+        );
+
       return { ...state, rules };
     }
 

@@ -18,7 +18,7 @@ export const removeRule = (rule: string): ThunkFunction => (
   getState
 ) => {
   const rules = SyncSelector.rules(getState());
-  if (!rules.has(rule)) return;
+  if (!rules.hasOwnProperty(rule)) return;
 
   dispatch({ type: SyncActions.REMOVE_RULE, payload: rule });
 };
