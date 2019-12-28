@@ -49,3 +49,18 @@ export const updateRule = (
     payload: { currentRule, tentativeRule }
   });
 };
+
+/**
+ * Saves the rules permanently into the chrome store and refresh the redux store with the new rules
+ */
+export const saveRules = (): ThunkFunctionAsync => async (
+  dispatch,
+  getState
+) => {
+  const rules = SyncSelector.rules(getState());
+  const payload = Object.values(rules);
+
+  await syncStore.set({ [ruleKey]: payload });
+
+  await dispatch(fetchRules());
+};

@@ -3,6 +3,7 @@ import * as SyncActions from "./actions";
 import * as SyncType from "./types";
 
 const defaultState: SyncType.SyncStore = {
+  numOriginalRules: 0,
   rules: {}
 };
 
@@ -17,7 +18,9 @@ export default (
         {} as Record<string, string>
       );
 
-      return { ...state, rules };
+      const numOriginalRules = Object.keys(rules).length;
+
+      return { numOriginalRules, rules };
     }
 
     case SyncActions.REMOVE_RULE: {
