@@ -3,13 +3,17 @@ import * as SyncActions from "./actions";
 import * as SyncType from "./types";
 
 const defaultState: SyncType.SyncStore = {
-  rules: []
+  rules: new Set<string>()
 };
 
-export default (state = defaultState, action: AnyAction) => {
+export default (
+  state: SyncType.SyncStore = defaultState,
+  action: AnyAction
+) => {
   switch (action.type) {
     case SyncActions.FETCH_RULES:
-      return { ...state, rules: action.payload };
+      const rules = new Set<string>(action.payload);
+      return { ...state, rules };
     default:
       return state;
   }

@@ -1,3 +1,3 @@
 export type SyncStore = {
-  rules: string[];
+  rules: Set<string>;
 };
