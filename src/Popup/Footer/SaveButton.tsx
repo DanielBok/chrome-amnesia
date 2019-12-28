@@ -3,14 +3,14 @@ import styles from "@/Popup/Footer/styles.less";
 import { Button, Tooltip } from "antd";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useHasChanges, useNewRulesHaveError } from "./hooks";
+import { useHasChanges, useRulesHaveErrors } from "./hooks";
 
 const title = "Commits changes permanently";
 
 export default () => {
   const dispatch = useDispatch();
   const hasChanges = useHasChanges();
-  const hasError = useNewRulesHaveError();
+  const hasError = useRulesHaveErrors();
 
   return (
     <Tooltip placement="bottom" title={title}>

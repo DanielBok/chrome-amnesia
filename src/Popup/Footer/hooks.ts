@@ -17,8 +17,15 @@ export const useHasChanges = () => {
   return false;
 };
 
-export const useNewRulesHaveError = () =>
-  Object.values(useSelector(SyncSelectors.rules)).reduce(
-    (hasError, rule) => hasError || !!SyncUtil.validateRule(rule),
-    false
+export const useRulesHaveErrors = () => {
+  const hasDuplicates = useSelector(SyncSelectors.duplicateRulesPresent);
+  const rules = useSelector(SyncSelectors.rules);
+
+  return (
+    hasDuplicates ||
+    Object.values(rules).reduce(
+      (hasError, rule) => hasError || !!SyncUtil.validateRule(rule),
+      false as boolean
+    )
   );
+};

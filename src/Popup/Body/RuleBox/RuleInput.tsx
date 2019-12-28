@@ -12,7 +12,8 @@ type RuleInputProps = {
 export default ({ rule }: RuleInputProps) => {
   const dispatch = useDispatch();
   const ruleValue = useSelector(SyncSelectors.rules)[rule];
-  const error = SyncUtil.validateRule(ruleValue);
+
+  const error = useErrorHook(rule);
 
   return (
     <>
@@ -28,4 +29,14 @@ export default ({ rule }: RuleInputProps) => {
       )}
     </>
   );
+};
+
+const useErrorHook = (rule: string) => {
+  const ruleValue = useSelector(SyncSelectors.rules)[rule];
+  const hasDuplicates = useSelector(SyncSelectors.ruleHasDuplicates(ruleValue));
+
+  const error = SyncUtil.validateRule(ruleValue);
+  if (error !== undefined) return error;
+
+  if (hasDuplicates) return `Rule has duplicates. Remove or change this rule.`;
 };
