@@ -1,11 +1,11 @@
 import { SyncApi } from "@/chrome/syncstore";
+import { useHasChangesHook } from "@/Popup/Footer/hooks";
 import styles from "@/Popup/Footer/styles.less";
 import { Button, Tooltip } from "antd";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useHasChangesHook } from "./hooks";
 
-const title = "Commits changes permanently";
+const title = "Reverts rules back to original";
 
 export default () => {
   const dispatch = useDispatch();
@@ -14,13 +14,12 @@ export default () => {
   return (
     <Tooltip placement="bottom" title={title}>
       <Button
-        type="primary"
-        icon="save"
+        icon="undo"
         className={styles.footerButton}
         disabled={!hasChanges}
-        onClick={() => dispatch(SyncApi.saveRules())}
+        onClick={() => dispatch(SyncApi.fetchRules())}
       >
-        Save
+        Reset
       </Button>
     </Tooltip>
   );
