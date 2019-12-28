@@ -1,7 +1,7 @@
-import { SyncSelectors } from "@/chrome/syncstore";
+import { SyncSelectors, SyncUtil } from "@/chrome/syncstore";
 import { useSelector } from "react-redux";
 
-export const useHasChangesHook = () => {
+export const useHasChanges = () => {
   const rules = useSelector(SyncSelectors.rules);
   const numOriginalRules = useSelector(SyncSelectors.numRules);
 
@@ -16,3 +16,9 @@ export const useHasChangesHook = () => {
   }
   return false;
 };
+
+export const useNewRulesHaveError = () =>
+  Object.values(useSelector(SyncSelectors.rules)).reduce(
+    (hasError, rule) => hasError || !!SyncUtil.validateRule(rule),
+    false
+  );

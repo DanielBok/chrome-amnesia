@@ -1,5 +1,5 @@
 import { SyncApi } from "@/chrome/syncstore";
-import { useHasChangesHook } from "@/Popup/Footer/hooks";
+import { useHasChanges } from "@/Popup/Footer/hooks";
 import styles from "@/Popup/Footer/styles.less";
 import { Button, Tooltip } from "antd";
 import React from "react";
@@ -9,7 +9,7 @@ const title = "Reverts rules back to original";
 
 export default () => {
   const dispatch = useDispatch();
-  const hasChanges = useHasChangesHook();
+  const hasChanges = useHasChanges();
 
   return (
     <Tooltip placement="bottom" title={title}>
