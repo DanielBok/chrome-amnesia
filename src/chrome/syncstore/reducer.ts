@@ -11,9 +11,17 @@ export default (
   action: AnyAction
 ) => {
   switch (action.type) {
-    case SyncActions.FETCH_RULES:
+    case SyncActions.FETCH_RULES: {
       const rules = new Set<string>(action.payload);
       return { ...state, rules };
+    }
+
+    case SyncActions.REMOVE_RULE: {
+      state.rules.delete(action.payload);
+      const rules = new Set([...state.rules]);
+      return { ...state, rules };
+    }
+
     default:
       return state;
   }
