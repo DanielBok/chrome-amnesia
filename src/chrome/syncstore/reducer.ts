@@ -32,6 +32,20 @@ export default (
       return { ...state, rules };
     }
 
+    case SyncActions.UPDATE_RULE: {
+      const { currentRule, tentativeRule } = action.payload as Record<
+        string,
+        string
+      >;
+      const rules = Object.entries(state.rules).reduce((acc, [rule, value]) => {
+        acc[rule] = rule === currentRule ? tentativeRule : value;
+
+        return acc;
+      }, {} as Record<string, string>);
+
+      return { ...state, rules };
+    }
+
     default:
       return state;
   }

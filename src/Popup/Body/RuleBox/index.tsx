@@ -1,7 +1,8 @@
 import { SyncApi } from "@/chrome/syncstore";
-import { Button, Col, Input, Row } from "antd";
+import { Button, Col, Row } from "antd";
 import React from "react";
 import { useDispatch } from "react-redux";
+import RuleInput from "./RuleInput";
 
 import styles from "./styles.less";
 
@@ -15,7 +16,7 @@ export default ({ rule }: RuleBoxProps) => {
   return (
     <Row gutter={8} className={styles.container}>
       <Col span={22}>
-        <Input defaultValue={rule} />
+        <RuleInput rule={rule} />
       </Col>
       <Col span={2} className={styles.centerAlign}>
         <Button
